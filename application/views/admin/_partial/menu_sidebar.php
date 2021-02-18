@@ -31,8 +31,8 @@
             <a href="#" class="nav-link"><i class="nav-icon fas fa-edit"></i><p>Data Master<i class="right fas fa-angle-left"></i></p></a>
             <ul class="nav nav-treeview">
               <li class="nav-item"><a href="<?php echo base_url();?>master/data_mobil" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Mobil</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Instruktur</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Peserta</p></a></li>
+              <li class="nav-item"><a href="<?php echo base_url();?>master/data_instruktur" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Instruktur</p></a></li>
+              <li class="nav-item"><a href="<?php echo base_url();?>master/data_peserta" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Peserta</p></a></li>
             </ul>
           </li>
           <li class="nav-item">
