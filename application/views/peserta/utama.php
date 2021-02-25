@@ -157,7 +157,7 @@
                     <div class="col-lg-6">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
-                                <h5 class="card-title">Timelien Proses Pendaftaran Anda</h5>
+                                <h5 class="card-title">Timelien Proses Pendaftaran Sampai Pelatihan</h5>
                             </div>
                             <div class="card-body">
                                 <div class="timeline">
@@ -231,7 +231,7 @@
                                         </div>
                                     </div>
                                     <?php } ?>
-                                    <?php if($dt['status_daftar']==5) { 
+                                    <?php if($dt['status_daftar']==6) { 
                                         $res_jadwal = $this->model_peserta->get_jadwal_peserta_per_peserta($dt['id']); ?>
                                     <div>
                                         <i class="fas fa-calendar bg-info"></i>

@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url();?>" class="nav-link"><i class="nav-icon fas fa-tachometer-alt"></i><p>Dashboard</p></a>
+            <a href="<?php echo base_url();?>admin/utama" class="nav-link"><i class="nav-icon fas fa-tachometer-alt"></i><p>Dashboard</p></a>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link"><i class="nav-icon fas fa-edit"></i><p>Data Master<i class="right fas fa-angle-left"></i></p></a>
@@ -39,21 +39,19 @@
             <a href="<?php echo base_url();?>admin/pendaftaran" class="nav-link"><i class="nav-icon fas fa-user"></i><p>Pendaftaran</p></a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url();?>admin/pembayaran" class="nav-link"><i class="nav-icon fa fa-money-check"></i><p>Pembayaran</p></a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url();?>admin/jadwal_kursus" class="nav-link"><i class="nav-icon fas fa-calendar-alt"></i><p>Jadwal Kursus</p></a>
           </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url();?>admin/peserta" class="nav-link"><i class="nav-icon fas fa-user"></i><p>Peserta</p></a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link"><i class="nav-icon fa fa-money-check"></i><p>Pembayaran</p></a>
-          </li>
+          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link"><i class="nav-icon fas fa-chart-pie"></i><p>Pelaporan<i class="right fas fa-angle-left"></i></p></a>
             <ul class="nav nav-treeview">
-              <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Data Peserta</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Pembayaran</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Data Instruktur</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Jadwal Kursus</p></a></li>
+              <li class="nav-item"><a href="<?php echo base_url();?>admin/laporan_peserta" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Data Peserta</p></a></li>
+              <li class="nav-item"><a href="<?php echo base_url();?>admin/laporan_pembayaran" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Pembayaran</p></a></li>
+              <li class="nav-item"><a href="<?php echo base_url();?>admin/laporan_instruktur" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Data Instruktur</p></a></li>
+              <li class="nav-item"><a href="<?php echo base_url();?>admin/laporan_jadwal_kursus" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Laporan Jadwal Kursus</p></a></li>
             </ul>
           </li>
           <li class="nav-item">

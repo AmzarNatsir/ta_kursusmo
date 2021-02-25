@@ -8,6 +8,10 @@ class Model_peserta extends CI_Model {
 	function get_profil_peserta($id_peserta) {
 		return $this->db->where("id", $id_peserta)->get("master_peserta")->row();
 	}
+	function get_all_peserta()
+	{
+		return $this->db->get("master_peserta")->result_array();
+	}
 	public function update_data_peserta($id_peserta, $data)
 	{
 		$this->db->where("id", $id_peserta)->update("master_peserta", $data);
@@ -65,7 +69,7 @@ class Model_peserta extends CI_Model {
 			->where("a.id_paket=b.id")
 			->where("b.id_mobil=c.id")
 			->where("a.id_peserta", $id_peserta)
-			->where_in("a.status_daftar", [1, 2, 3, 5])->get()->result_array();
+			->where_in("a.status_daftar", [1, 2, 3, 6])->get()->result_array();
 	}
 	function get_semua_data_pendaftaran_proses()
 	{
@@ -92,7 +96,7 @@ class Model_peserta extends CI_Model {
 			->where("a.id", $id)->get()->row();
 	}
 	//jadwal
-	function get_semua_data_peserta_acc()
+	function get_semua_data_peserta_telah_bayar()
 	{
 		return $this->db->select("a.*, b.nama_paket, c.nama_mobil, d.nama_lengkap, d.jenkel, d.tempat_lahir, d.tanggal_lahir, d.no_identitas, d.alamat, d.no_telepon, d.file_ktp, d.file_photo, d.file_sim")
 			->from("tabel_daftar a")
@@ -102,8 +106,9 @@ class Model_peserta extends CI_Model {
 			->where("a.id_paket=b.id")
 			->where("b.id_mobil=c.id")
 			->where("a.id_peserta=d.id")
-			->where("a.status_daftar", 2)->get()->result_array();
+			->where("a.status_daftar", 5)->get()->result_array();
 	}
+	
 	function insert_jadwal($data)
 	{
 		$this->db->insert("tabel_jadwal", $data);
@@ -140,5 +145,36 @@ class Model_peserta extends CI_Model {
 			->where("a.status IS NULL")
 			->where("a.id_daftar", $id_daftar)
 			->get()->row();
+	}
+	//pembayaran
+	function get_semua_data_peserta_acc()
+	{
+		return $this->db->select("a.*, b.nama_paket, c.nama_mobil, d.nama_lengkap, d.jenkel, d.tempat_lahir, d.tanggal_lahir, d.no_identitas, d.alamat, d.no_telepon, d.file_ktp, d.file_photo, d.file_sim")
+			->from("tabel_daftar a")
+			->from("master_paket b")
+			->from("master_mobil c")
+			->from("master_peserta d")
+			->where("a.id_paket=b.id")
+			->where("b.id_mobil=c.id")
+			->where("a.id_peserta=d.id")
+			->where("a.status_daftar", 2)->get()->result_array();
+	}
+	function insert_pembayaran($data)
+	{
+		$this->db->insert("tabel_bayar", $data);
+	}
+	function get_data_pembayaran($bulan, $tahun)
+	{
+		return $this->db->select("a.*, b.no_pendaftaran, c.nama_lengkap, d.nama_paket")
+			->from("tabel_bayar a")
+			->from("tabel_daftar b")
+			->from("master_peserta c")
+			->from("master_paket d")
+			->where("a.id_daftar=b.id")
+			->where("b.id_peserta=c.id")
+			->where("b.id_paket=d.id")
+			->where("MONTH(a.tgl_pembayaran)", $bulan)
+			->where("YEAR(a.tgl_pembayaran)", $tahun)->get()->result_array();
+
 	}
 }

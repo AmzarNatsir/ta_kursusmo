@@ -47,7 +47,9 @@ class Admin extends CI_Controller {
 	{
 		$this->_init();
 		$this->model_security->get_security_admin();
-		$this->load->view('admin/utama');
+		$data['total_peserta'] = $this->model_peserta->get_all_peserta();
+		$data['total_instruktur'] = $this->model_master->ambil_data_instruktur();
+		$this->load->view('admin/utama', $data);
 	}
 	//pendaftaran
 	public function pendaftaran()
@@ -77,12 +79,41 @@ class Admin extends CI_Controller {
 		$this->session->set_flashdata("konfirm", "Data persetujuan berhasil disimpan");
 		redirect("admin/pendaftaran");
 	}
+	//pembayaran
+	public function pembayaran()
+	{
+		$this->_init();
+		$this->model_security->get_security_admin();
+		$data['data_peserta_acc'] = $this->model_peserta->get_semua_data_peserta_acc(); //1. Status Daftar
+		//$data['data_jadwal'] = $this->model_peserta->get_jadwal_peserta();
+		$this->load->view('admin/pembayaran/index', $data);
+	}
+	public function form_pembayaran()
+	{
+		$this->model_security->get_security_admin();
+		$id_pendaftaran = $this->uri->segment(3);
+		$data['res'] = $this->model_peserta->get_profil_pendaftaran($id_pendaftaran);
+		$this->load->view('admin/pembayaran/frm_pembayaran', $data);
+	}
+	public function simpan_data_pembayaran()
+	{
+		$id_pendaftaran = $this->input->post("id_pendaftaran");
+		$data['id_daftar'] = $id_pendaftaran;
+		$data['tgl_pembayaran'] = date("Y-m-d");
+		$data['nominal'] = str_replace(".", "", $this->input->post("inp_nominal"));
+		$data['keterangan'] = $this->input->post("inp_keterangan");
+		$this->model_peserta->insert_pembayaran($data);
+		$update['status_daftar'] = 5; //Pembayaran telah diinput
+		$this->model_peserta->update_pendaftaran($id_pendaftaran, $update);
+		$this->session->set_flashdata("konfirm", "Data Pembayaran berhasil disimpan");
+		redirect("admin/pembayaran");
+	}
 	//Jadwal Kursus
 	public function jadwal_kursus()
 	{
 		$this->_init();
 		$this->model_security->get_security_admin();
-		$data['data_peserta_acc'] = $this->model_peserta->get_semua_data_peserta_acc(); //1. Status Daftar
+		$data['data_peserta_acc'] = $this->model_peserta->get_semua_data_peserta_telah_bayar(); //1. Status Daftar
 		$data['data_jadwal'] = $this->model_peserta->get_jadwal_peserta();
 		$this->load->view('admin/jadwal_kursus/index', $data);
 	}
@@ -104,9 +135,45 @@ class Admin extends CI_Controller {
 		$data['hari'] = $hari_pilihan;
 		$data['id_instruktur'] = $this->input->post("pil_instruktur");
 		$this->model_peserta->insert_jadwal($data);
-		$update['status_daftar'] = 5; //Telah Terjadwal
+		$update['status_daftar'] = 6; //Telah Terjadwal
 		$this->model_peserta->update_pendaftaran($id_pendaftaran, $update);
 		$this->session->set_flashdata("konfirm", "Data Jadwal berhasil disimpan");
 		redirect("admin/jadwal_kursus");
+	}
+	//pelaporan
+	public function laporan_peserta()
+	{
+		$this->_init();
+		$this->model_security->get_security_admin();
+		$data['list_data'] = $this->model_peserta->get_all_peserta();
+		$this->load->view('admin/pelaporan/data_peserta/index', $data);
+	}
+	public function laporan_instruktur()
+	{
+		$this->_init();
+		$this->model_security->get_security_admin();
+		$data['list_data'] =  $this->model_master->ambil_data_instruktur();
+		$this->load->view('admin/pelaporan/data_instruktur/index', $data);
+	}
+	public function laporan_jadwal_kursus()
+	{
+		$this->_init();
+		$this->model_security->get_security_admin();
+		$data['list_data'] =  $this->model_peserta->get_jadwal_peserta();
+		$this->load->view('admin/pelaporan/data_jadwal/index', $data);
+	}
+	public function laporan_pembayaran()
+	{
+		$this->_init();
+		$this->model_security->get_security_admin();
+		//$data['list_data'] =  $this->model_peserta->get_data_pembayaran();
+		$this->load->view('admin/pelaporan/pembayaran/index');
+	}
+	public function view_laporan_pembayaran()
+	{
+		$bulan = $this->uri->segment(3);
+		$tahun = $this->uri->segment(4);
+		$data['list_data'] = $this->model_peserta->get_data_pembayaran($bulan, $tahun);
+		$this->load->view('admin/pelaporan/pembayaran/view_data', $data);
 	}
 }

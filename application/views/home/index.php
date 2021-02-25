@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Selamat Datang | Kursus Mobil ABC</title>
+  <title>Selamat Datang | Kursus Mobil AN-NAILAH</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -58,24 +58,54 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="card-title">Instruktur</h5>
+                                <table class="table table-bordered">
+                                <thead>                  
+                                    <tr>
+                                    <th style="width: 5%">#</th>
+                                    <th style="width: 10%">Photo</th>
+                                    <th style="width: 45%">Nama Instruktur</th>
+                                    <th style="width: 40%">Alamat/No.Telepon</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $nom=1;
+                                foreach($data_instruktur as $dt) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $nom;?></td>
+                                        <td><img src="<?php echo base_url()?>assets/upload/instruktur/<?php echo $dt['photo'] ?>" alt="produk" class="widget-image img-circle pull-left animation-fadeIn" style="width: 80px; height: 80px"></td>
+                                        <td><?php echo $dt['nama_instruktur'];?></td>
+                                        <td><?php echo $dt['alamat'];?>, <?php echo $dt['no_telepon'];?></td>
+                                    </tr>
+                                <?php
+                                $nom++;
+                                }
+                                ?>  
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
                                 <h5 class="card-title">Paket</h5>
-                                <p class="card-text">
-                                Lembaga Kursus An-Nailah Soppeng beralamat di jalan Kayangan, Lalabatrilau, Lalabata, Kabupaten Soppeng
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card card-primary card-outline">
-                            <div class="card-body">
-                                <h5 class="card-title">Instruktur</h5>
-
+                                <table class="table" style="width: 100%;">
+                                <?php
+                                foreach($data_paket as $paket) { ?>
+                                <tr>
+                                    <td><strong><?php echo $paket['nama_paket'];?></strong><br>
+                                    <?php echo $paket['deskripsi'];?><br>
+                                    Mobil : <?php echo $paket['nama_mobil'];?>
+                                    <strong><p style="text-align: right; color:blue">Rp. <?php echo number_format($paket['biaya'], 0, ",", ".");?></p></strong>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                                </table>
                             </div>
                         </div>
                     </div>

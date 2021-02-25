@@ -34,7 +34,7 @@
             <?php echo $this->session->flashdata('konfirm'); ?>
         </div>
         <?php endif; ?>
-      <p class="login-box-msg">Login</p>
+      <p class="login-box-msg">Login Administrator</p>
 
       <form action="<?php echo base_url();?>admin/proses_login" method="post">
         <div class="input-group mb-3">
