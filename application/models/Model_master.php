@@ -10,6 +10,10 @@ class Model_master extends CI_Model {
     {
         return $this->db->get("master_mobil")->result_array();
     }
+    public function ambil_data_mobil_aktif()
+    {
+        return $this->db->where("status", 1)->get("master_mobil")->result_array();
+    }
     public function insert_data_mobil($data)
     {
         $this->db->insert("master_mobil", $data);
@@ -62,5 +66,33 @@ class Model_master extends CI_Model {
         {
             unlink(FCPATH.'assets/upload/instruktur/'.$img->photo);
         }
+    }
+    //master paket
+    function ambil_data_paket()
+    {
+        $this->db->select("a.*, b.nopol, b.nama_mobil")
+                ->from("master_paket a")
+                ->from("master_mobil b")
+                ->where("a.id_mobil=b.id")
+                ->order_by("a.tgl_posting", "desc");
+        return $this->db->get()->result_array();
+    }
+    function insert_data_paket($data)
+    {
+        $this->db->insert("master_paket", $data);
+    }
+    function get_profil_paket($id_paket)
+    {
+        return $this->db->where("id", $id_paket)->get("master_paket")->row();
+    }
+    public function update_data_paket($id, $data)
+    {
+        $this->db->where("id", $id)
+            ->update("master_paket", $data);
+    }
+    public function hapus_data_paket($id)
+    {
+        $this->db->where("id", $id)
+            ->delete("master_paket");
     }
 }

@@ -17,6 +17,7 @@ class Master extends CI_Controller
     public function data_mobil()
 	{
 		$this->_init();
+		$this->model_security->get_security_admin();
 		$data['list_data'] = $this->model_master->ambil_data_mobil();
 		$this->load->view('admin/data_master/mobil/index', $data);
 	}
@@ -59,6 +60,7 @@ class Master extends CI_Controller
 	public function data_instruktur()
 	{
 		$this->_init();
+		$this->model_security->get_security_admin();
 		$data['list_data'] = $this->model_master->ambil_data_instruktur();
 		$this->load->view('admin/data_master/instruktur/index', $data);
 	}
@@ -166,5 +168,53 @@ class Master extends CI_Controller
 	        $data = array('upload_data' => $this->upload->data());
 	       	return $filename.$data['upload_data']['file_ext'];
 	    }
+	}
+	//paket kursus
+	public function paket_kursus()
+	{
+		$this->_init();
+		$this->model_security->get_security_admin();
+		$data['list_data'] = $this->model_master->ambil_data_paket();
+		$data['list_mobil'] = $this->model_master->ambil_data_mobil_aktif();
+		$this->load->view('admin/data_master/paket/index', $data);
+	}
+	public function simpan_data_paket()
+	{
+		$data['nama_paket'] = $this->input->post("inp_nama_paket");
+		$data['deskripsi'] = $this->input->post("inp_deskripsi");
+		$data['id_mobil'] = $this->input->post("pil_mobil");
+		$data['biaya'] = str_replace(",", "", $this->input->post("inp_biaya"));
+		$data['jumlah_hari'] = $this->input->post("inp_jumlah_hari");
+		$data['status'] = 1; //Aktif, 2. Tidak Aktif
+		$data['tgl_posting'] = date("Y-m-y");
+		$this->model_master->insert_data_paket($data);
+		$this->session->set_flashdata("konfirm", "Data berhasil disimpan");
+		redirect("master/paket_kursus");
+	}
+	public function edit_data_paket()
+	{
+		$id_paket = $this->uri->segment(3);
+		$data['res'] = $this->model_master->get_profil_paket($id_paket);
+		$data['list_mobil'] = $this->model_master->ambil_data_mobil_aktif();
+		$this->load->view("admin/data_master/paket/edit", $data);
+	}
+	public function rubah_data_paket()
+	{
+		$id_data = $this->input->post("id_data");
+		$data['nama_paket'] = $this->input->post("inp_nama_paket");
+		$data['deskripsi'] = $this->input->post("inp_deskripsi");
+		$data['id_mobil'] = $this->input->post("pil_mobil");
+		$data['biaya'] = str_replace(",", "", $this->input->post("inp_biaya"));
+		$data['jumlah_hari'] = $this->input->post("inp_jumlah_hari");
+		$data['status'] = $this->input->post("pil_status");
+		$this->model_master->update_data_paket($id_data, $data);
+		$this->session->set_flashdata("konfirm", "Data berhasil disimpan");
+		redirect("master/paket_kursus");
+	}
+	public function hapus_data_paket()
+	{
+		$id_data = $this->input->post("id_data");
+		$this->model_master->hapus_data_paket($id_data);
+		echo "Data berhasil di hapus";
 	}
 }

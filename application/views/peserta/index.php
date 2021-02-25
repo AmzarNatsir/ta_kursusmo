@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Login Administrator | Kursus Mobil An Nailah</title>
+  <title>Selamat Datang | Kursus Mobil An Nailah</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -27,21 +27,21 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-        <?php if ($this->session->flashdata('konfirm')): ?>
+        <?php if ($this->session->flashdata('konfirm_login')): ?>
         <div class="alert alert-info alert-dismissible" id="success-alert">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h4><i class="icon fa fa-info"></i> Konfirmasi !</h4>
-            <?php echo $this->session->flashdata('konfirm'); ?>
+            <?php echo $this->session->flashdata('konfirm_login'); ?>
         </div>
         <?php endif; ?>
       <p class="login-box-msg">Login</p>
 
-      <form action="<?php echo base_url();?>admin/proses_login" method="post">
+      <form action="<?php echo base_url();?>peserta/proses_login" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="inp_username" id="inp_username" maxlength="100" placeholder="Nama Pengguna" required>
+          <input type="email" class="form-control" name="inp_email" id="inp_email" maxlength="100" placeholder="Email" required>
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>

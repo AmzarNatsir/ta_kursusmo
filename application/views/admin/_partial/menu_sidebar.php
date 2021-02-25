@@ -32,11 +32,17 @@
             <ul class="nav nav-treeview">
               <li class="nav-item"><a href="<?php echo base_url();?>master/data_mobil" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Mobil</p></a></li>
               <li class="nav-item"><a href="<?php echo base_url();?>master/data_instruktur" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Instruktur</p></a></li>
-              <li class="nav-item"><a href="<?php echo base_url();?>master/data_peserta" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Data Peserta</p></a></li>
+              <li class="nav-item"><a href="<?php echo base_url();?>master/paket_kursus" class="nav-link"><i class="far fa-circle nav-icon"></i><p>Paket Kursus</p></a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="nav-icon fas fa-calendar-alt"></i><p>Jadwal Kursus</p></a>
+            <a href="<?php echo base_url();?>admin/pendaftaran" class="nav-link"><i class="nav-icon fas fa-user"></i><p>Pendaftaran</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url();?>admin/jadwal_kursus" class="nav-link"><i class="nav-icon fas fa-calendar-alt"></i><p>Jadwal Kursus</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url();?>admin/peserta" class="nav-link"><i class="nav-icon fas fa-user"></i><p>Peserta</p></a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link"><i class="nav-icon fa fa-money-check"></i><p>Pembayaran</p></a>
@@ -51,7 +57,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url();?>login/logout" class="nav-link"><i class="nav-icon fas fa-times"></i><p>Logout</p></a>
+            <a href="<?php echo base_url();?>admin/logout" class="nav-link"><i class="nav-icon fas fa-times"></i><p>Logout</p></a>
           </li>
         </ul>
       </nav>
